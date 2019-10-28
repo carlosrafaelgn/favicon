@@ -1,0 +1,675 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-us" dir="ltr">
+<head>
+	<meta charset="utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+	<meta property="og:locale" content="en_US" />
+	<meta property="og:type" content="website" />
+	<meta property="og:url" content="https://carlosrafaelgn.github.io/" />
+	<meta property="og:title" content="Favicon Helper" />
+	<meta property="og:site_name" content="Favicon Helper" />
+	<meta property="og:description" content="App that helps generating favicons, HTML headers and manifest files" />
+	<meta property="og:image" content="https://carlosrafaelgn.github.io/assets/screenshot.jpg" />
+	<meta property="og:image:type" content="image/jpeg">
+	<meta property="og:image:width" content="768">
+	<meta property="og:image:height" content="768">
+	<meta name="author" content="Carlos Rafael Gimenes das Neves" />
+	<meta name="description" content="App that helps generating favicons, HTML headers and manifest files" />
+	<meta name="keywords" content="favicon, generator, html header, manifest, browserconfig" />
+	<meta name="apple-mobile-web-app-capable" content="yes" />
+	<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+	<meta name="apple-mobile-web-app-title" content="Favicon Helper" />
+	<link rel="apple-touch-icon" sizes="57x57" href="favicons/apple-icon-57x57.png" />
+	<link rel="apple-touch-icon" sizes="60x60" href="favicons/apple-icon-60x60.png" />
+	<link rel="apple-touch-icon" sizes="72x72" href="favicons/apple-icon-72x72.png" />
+	<link rel="apple-touch-icon" sizes="76x76" href="favicons/apple-icon-76x76.png" />
+	<link rel="apple-touch-icon" sizes="114x114" href="favicons/apple-icon-114x114.png" />
+	<link rel="apple-touch-icon" sizes="120x120" href="favicons/apple-icon-120x120.png" />
+	<link rel="apple-touch-icon" sizes="144x144" href="favicons/apple-icon-144x144.png" />
+	<link rel="apple-touch-icon" sizes="152x152" href="favicons/apple-icon-152x152.png" />
+	<link rel="apple-touch-icon" sizes="180x180" href="favicons/apple-icon-180x180.png" />
+	<link rel="icon" type="image/png" sizes="512x512" href="favicons/favicon-512x512.png" />
+	<link rel="icon" type="image/png" sizes="192x192" href="favicons/favicon-192x192.png" />
+	<link rel="icon" type="image/png" sizes="96x96" href="favicons/favicon-96x96.png" />
+	<link rel="icon" type="image/png" sizes="48x48" href="favicons/favicon-48x48.png" />
+	<link rel="icon" type="image/png" sizes="32x32" href="favicons/favicon-32x32.png" />
+	<link rel="icon" type="image/png" sizes="16x16" href="favicons/favicon-16x16.png" />
+	<link rel="Shortcut Icon" href="favicon.ico" />
+	<link rel="Shortcut Icon" href="favicon.png" />
+	<link rel="manifest" href="manifest.json" />
+	<meta name="msapplication-config" content="browserconfig.xml" />
+	<meta name="theme-color" content="#222222" />
+
+	<title>Favicon Helper</title>
+
+	<link href="https://fonts.googleapis.com/css?family=Open+Sans:400,600" rel="stylesheet" type="text/css" />
+	<style type="text/css">
+		* {
+			-webkit-box-sizing: border-box;
+			-moz-box-sizing: border-box;
+			box-sizing: border-box;
+		}
+
+		body {
+			padding: 0;
+			color: #fff;
+			background: #222;
+		}
+
+		body, button, input, select {
+			margin: 0;
+			font: 400 14px 'Open Sans', 'Segoe UI', Helvetica, Arial, sans-serif;
+		}
+
+		main {
+			width: 100%;
+			margin: 0 auto;
+			max-width: 600px;
+			padding: 0 40px 40px;
+		}
+
+		h1 {
+			font-size: 25px;
+			font-weight: 600;
+			border-bottom: 1px solid #f90;
+			color: #f90;
+			text-shadow: 0 1px 5px #f90;
+			margin: 1em 0;
+		}
+
+		ul {
+			margin: 0;
+			padding: 0;
+		}
+
+		li {
+			margin: 0;
+			padding: 0;
+			list-style: none;
+		}
+
+		input {
+			display: block;
+			width: 100%;
+			background: #eee;
+			color: #000;
+			border-radius: 4px;
+			border: 1px solid #eee;
+			line-height: 1.5;
+			padding: 6px 12px;
+			margin: 0.5em 0 1em;
+			-webkit-box-shadow: 0 0 5px #fff;
+			box-shadow: 0 0 5px #fff;
+			-webkit-transition: border-color ease-in-out .2s,-webkit-box-shadow ease-in-out .2s;
+			-o-transition: border-color ease-in-out .2s,box-shadow ease-in-out .2s;
+			transition: border-color ease-in-out .2s,box-shadow ease-in-out .2s;
+		}
+
+			input:focus {
+				-webkit-box-shadow: 0 0 8px #f90;
+				box-shadow: 0 0 8px #f90;
+				border-color: #f90;
+			}
+
+		label {
+			font-weight: 600;
+			line-height: 1.5;
+		}
+
+		input, button, select, input:hover, button:hover, select:hover, input:focus, button:focus, select:focus, input:active, button:active, select:active {
+			outline: 0;
+		}
+
+		.btn {
+			display: block;
+			background: #eee;
+			color: #000;
+			font-weight: 600;
+			border-radius: 4px;
+			text-decoration: none;
+			border: 0;
+			line-height: 1.5;
+			padding: 6px 12px;
+			margin: 1em auto;
+			cursor: pointer;
+			-webkit-box-shadow: 0 0 5px #fff;
+			box-shadow: 0 0 5px #fff;
+			-o-transition: background-color ease-in-out .2s, box-shadow ease-in-out .2s;
+			transition: background-color ease-in-out .2s, box-shadow ease-in-out .2s;
+		}
+
+			.btn:hover, .btn:focus {
+				background: #f90;
+				-webkit-box-shadow: 0 0 8px #f90;
+				box-shadow: 0 0 8px #f90;
+			}
+
+			.btn:active {
+				background: #e80;
+				-webkit-box-shadow: 0 0 8px #f90, inset 0 3px 5px rgba(0,0,0,0.25);
+				box-shadow: 0 0 8px #f90, inset 0 3px 5px rgba(0,0,0,0.25);
+			}
+
+		.message {
+			text-align: center;
+			background: #eee;
+			color: #000;
+			font-weight: 600;
+			border-radius: 4px;
+			border: 0;
+			line-height: 1.5;
+			padding: 6px 12px;
+			margin: 1em 0;
+			-webkit-box-shadow: 0 0 5px #fff;
+			box-shadow: 0 0 5px #fff;
+		}
+	</style>
+</head>
+<body>
+	<main>
+		<h1>
+			Favicon Helper
+		</h1>
+		<div>
+			<label for="txtFile">Image File (PNG, JPEG or SVG, preferably square)</label>
+			<input type="file" accept="image/*" id="txtFile" />
+		</div>
+		<div>
+			<label for="txtURL">Page URL</label>
+			<input type="url" id="txtURL" spellcheck="false" value="https://carlosrafaelgn.github.io/" />
+		</div>
+		<div>
+			<label for="txtLocale">Locale</label>
+			<input type="text" id="txtLocale" spellcheck="false" value="en-US" />
+		</div>
+		<div>
+			<label for="txtAuthor">Author</label>
+			<input type="text" id="txtAuthor" spellcheck="false" value="Carlos Rafael Gimenes das Neves" />
+		</div>
+		<div>
+			<label for="txtTitle">Title</label>
+			<input type="text" id="txtTitle" spellcheck="false" value="Favicon Helper" />
+		</div>
+		<div>
+			<label for="txtSiteName">Site Name</label>
+			<input type="text" id="txtSiteName" spellcheck="false" value="Favicon Helper" />
+		</div>
+		<div>
+			<label for="txtSiteNameShort">Site Name (Short Version)</label>
+			<input type="text" id="txtSiteNameShort" spellcheck="false" value="Favicon Helper" />
+		</div>
+		<div>
+			<label for="txtDescription">Description</label>
+			<input type="text" id="txtDescription" spellcheck="true" value="App to help generating favicons, HTML headers and manifest files" />
+		</div>
+		<div>
+			<label for="txtKeywords">Keywords</label>
+			<input type="text" id="txtKeywords" spellcheck="true" value="favicon, generator, html header, manifest, browserconfig" />
+		</div>
+		<div>
+			<label for="txtStartURL">Start URL</label>
+			<input type="url" id="txtStartURL" spellcheck="false" value="/" />
+		</div>
+		<div>
+			<label for="txtDirection">Reading Direction</label>
+			<input type="url" id="txtDirection" spellcheck="false" value="ltr" />
+		</div>
+		<div>
+			<label for="txtThemeColor">Theme Color</label>
+			<input type="text" id="txtThemeColor" spellcheck="false" value="#222222" />
+		</div>
+		<div>
+			<label for="txtBackgroundColor">Background Color</label>
+			<input type="text" id="txtBackgroundColor" spellcheck="false" value="#222222" />
+		</div>
+		<div>
+			<label for="txtOrientation">Orientation</label>
+			<input type="text" id="txtOrientation" spellcheck="false" value="portrait-primary" />
+		</div>
+		<div>
+			<label for="txtDisplay">Display</label>
+			<input type="text" id="txtDisplay" spellcheck="false" value="standalone" />
+		</div>
+		<div>
+			<label for="txtOGImage">Open Graph Image URL</label>
+			<input type="url" id="txtOGImage" spellcheck="false" value="https://carlosrafaelgn.github.io/assets/screenshot.jpg" />
+		</div>
+		<div>
+			<label for="txtOGImageType">Open Graph Image Type</label>
+			<input type="text" id="txtOGImageType" spellcheck="false" value="image/jpeg" />
+		</div>
+		<div>
+			<label for="txtOGImageWidth">Open Graph Image Width</label>
+			<input type="number" id="txtOGImageWidth" value="1280" />
+		</div>
+		<div>
+			<label for="txtOGImageHeight">Open Graph Image Height</label>
+			<input type="number" id="txtOGImageHeight" value="720" />
+		</div>
+		<div>
+			<label for="txtManifest">Manifest File</label>
+			<input type="text" id="txtManifest" spellcheck="false" value="manifest.json" />
+		</div>
+		<div>
+			<label for="txtBrowserConfig">Browser Config File</label>
+			<input type="text" id="txtBrowserConfig" spellcheck="false" value="browserconfig.xml" />
+		</div>
+		<div>
+			<label for="txtPrefix">Favicon Prefix</label>
+			<input type="text" id="txtPrefix" spellcheck="false" value="favicon" />
+		</div>
+		<div>
+			<label for="txtManifestPath">Manifest/Browser Config Path (Relative to page)</label>
+			<input type="text" id="txtManifestPath" spellcheck="false" value="" />
+		</div>
+		<div>
+			<label for="txtFaviconPath">Favicons Path (Relative to page)</label>
+			<input type="text" id="txtFaviconPath" spellcheck="false" value="favicons" />
+		</div>
+		<div>
+			<label for="txtFaviconManifestPath">Favicons Path (Relative to manifest)</label>
+			<input type="text" id="txtFaviconManifestPath" spellcheck="false" value="favicons" />
+		</div>
+		<div class="message" id="divMessage" style="display: none;"></div>
+		<button class="btn" type="button" onclick="generate()">Generate!</button>
+		<h1>Useful Links</h1>
+		<ul>
+			<li>
+				<a class="btn" href="https://carlosrafaelgn.github.io/favicon/" target="_blank">This app!</a>
+			</li>
+			<li>
+				<a class="btn" href="https://github.com/carlosrafaelgn/favicon" target="_blank">GitHub - This app's source code</a>
+			</li>
+			<li>
+				<a class="btn" href="https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/manifest.json" target="_blank">MDN - manifest.json</a>
+			</li>
+			<li>
+				<a class="btn" href="https://developer.mozilla.org/en-US/docs/Web/Manifest" target="_blank">MDN - Web App Manifest</a>
+			</li>
+			<li>
+				<a class="btn" href="https://github.com/Stuk/jszip" target="_blank">JSZip - Library used to create ZIP files using JavaScript</a>
+			</li>
+		</ul>
+	</main>
+	<script type="text/javascript" src="jszip.min.js"></script>
+	<script type="text/javascript">
+		//<![CDATA[
+		"use strict";
+
+		if (("serviceWorker" in navigator))
+			navigator.serviceWorker.register("sw.js");
+
+		var generating = false;
+
+		window.trim = (function () {
+			if (window.String && window.String.prototype && window.String.prototype.trim)
+				return function (str) { return str.trim(); };
+			var expr = /^\s+|\s+$/g;
+			return function (str) { return str.replace(expr, ""); };
+		})();
+
+		function trimValue(input) {
+			return trim(document.getElementById(input).value);
+		};
+
+		function showMessage(message) {
+			var divMessage = document.getElementById("divMessage");
+			divMessage.textContent = message;
+			divMessage.style.display = "";
+		}
+
+		function endWithMessage(message) {
+			generating = false;
+			showMessage(message);
+		}
+
+		window.BlobDownloader = {
+			blobURL: null,
+
+			saveAs: (window.saveAs || window.webkitSaveAs || window.mozSaveAs || window.msSaveAs || window.navigator.saveBlob || window.navigator.webkitSaveBlob || window.navigator.mozSaveBlob || window.navigator.msSaveBlob),
+
+			supported: (("Blob" in window) && ("URL" in window) && ("createObjectURL" in window.URL) && ("revokeObjectURL" in window.URL)),
+
+			alertNotSupported: function () {
+				showMessage("Unfortunately your browser does not support the required features \uD83D\uDE22");
+				return false;
+			},
+
+			download: function (filename, blob) {
+				if (!BlobDownloader.supported)
+					return false;
+				if (BlobDownloader.blobURL) {
+					URL.revokeObjectURL(BlobDownloader.blobURL);
+					BlobDownloader.blobURL = null;
+				}
+
+				if (BlobDownloader.saveAs) {
+					try {
+						BlobDownloader.saveAs.call(window.navigator, blob, filename);
+						return;
+					} catch (ex) {
+						showMessage("An error occurred while downloading the data \uD83D\uDE22");
+					}
+				}
+
+				var a = document.createElement("a"), evt;
+				BlobDownloader.blobURL = URL.createObjectURL(blob);
+				a.href = BlobDownloader.blobURL;
+				a.download = filename;
+				if (document.createEvent && (window.MouseEvent || window.MouseEvents)) {
+					try {
+						evt = document.createEvent("MouseEvents");
+						evt.initMouseEvent("click", true, false, window, 0, 0, 0, 0, 0, false, false, false, false, 0, null);
+						a.dispatchEvent(evt);
+						return;
+					} catch (ex) {
+					}
+				}
+				a.click(); // Works on Chrome but not on Firefox...
+				return true;
+			}
+		};
+
+		function generateImage(srcImage, srcWidth, srcHeight, canvas, context, dstSize, callback) {
+			var dstWidth, dstHeight;
+
+			if (srcWidth >= srcHeight) {
+				dstWidth = dstSize;
+				dstHeight = (srcHeight * dstSize / srcWidth) | 0;
+			} else {
+				dstHeight = dstSize;
+				dstWidth = (srcWidth * dstSize / srcHeight) | 0;
+			}
+
+			canvas.width = dstSize;
+			canvas.height = dstSize;
+			try {
+				if (("imageSmoothingEnabled" in context))
+					context.imageSmoothingEnabled = true;
+				if (("imageSmoothingQuality" in context))
+					context.imageSmoothingQuality = "high";
+			} catch (ex) {
+				// Just ignore...
+			}
+			context.clearRect(0, 0, dstSize, dstSize);
+			context.drawImage(srcImage, (dstSize - dstWidth) >> 1, (dstSize - dstHeight) >> 1, dstWidth, dstHeight);
+
+			if (!HTMLCanvasElement.prototype.toBlob) {
+				// https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API/Drawing_DOM_objects_into_a_canvas#JavaScript
+				var data = canvas.toDataURL("image/png", 1),
+					binStr = atob(data.split(",")[1]),
+					len = binStr.length,
+					arr = new Uint8Array(len);
+				for (var i = 0; i < len; i++)
+					arr[i] = binStr.charCodeAt(i);
+				callback(new Blob([arr], { type: "image/png" }));
+			} else {
+				canvas.toBlob(callback, "image/png", 1);
+			}
+		}
+
+		function generateImages(srcImage, srcWidth, srcHeight, canvas, context, dstSizes, callback) {
+			var blobs = {};
+
+			function next(i) {
+				if (i >= dstSizes.length)
+					callback(blobs);
+				else
+					generateImage(srcImage, srcWidth, srcHeight, canvas, context, dstSizes[i], function (blob) {
+						blobs[dstSizes[i]] = blob;
+						next(i + 1);
+					});
+			}
+
+			next(0);
+		}
+
+		function generate() {
+			if (generating)
+				return;
+
+			var txtFile = document.getElementById("txtFile"),
+				url = trimValue("txtURL"),
+				locale = trimValue("txtLocale"),
+				localeU = locale,
+				author = trimValue("txtAuthor"),
+				title = trimValue("txtTitle"),
+				siteName = trimValue("txtSiteName"),
+				siteNameShort = trimValue("txtSiteNameShort"),
+				description = trimValue("txtDescription"),
+				startURL = trimValue("txtStartURL"),
+				direction = trimValue("txtDirection"),
+				keywords = trimValue("txtKeywords"),
+				startURL = trimValue("txtStartURL"),
+				themeColor = trimValue("txtThemeColor"),
+				backgroundColor = trimValue("txtBackgroundColor"),
+				orientation = trimValue("txtOrientation"),
+				display = trimValue("txtDisplay"),
+				ogImage = trimValue("txtOGImage"),
+				ogImageType = trimValue("txtOGImageType"),
+				ogImageWidth = trimValue("txtOGImageWidth"),
+				ogImageHeight = trimValue("txtOGImageHeight"),
+				manifest = trimValue("txtManifest"),
+				browserConfig = trimValue("txtBrowserConfig"),
+				prefix = trimValue("txtPrefix"),
+				manifestPath = trimValue("txtManifestPath"),
+				faviconPath = trimValue("txtFaviconPath"),
+				faviconManifestPath = trimValue("txtFaviconManifestPath");
+
+			if (!window.File || !window.FileReader || !window.FormData || !BlobDownloader.supported) {
+				BlobDownloader.alertNotSupported();
+				return;
+			}
+
+			if (!txtFile.files || !txtFile.files.length || !txtFile.files[0])
+				return showMessage("Please, select an image to proceed \uD83D\uDE22");
+
+			generating = true;
+
+			showMessage("Generating\u2026");
+
+			if (manifestPath && manifestPath.charAt(manifestPath.length - 1) !== "/")
+				manifestPath += "/";
+
+			if (faviconPath && faviconPath.charAt(faviconPath.length - 1) !== "/")
+				faviconPath += "/";
+
+			if (faviconManifestPath && faviconManifestPath.charAt(faviconManifestPath.length - 1) !== "/")
+				faviconManifestPath += "/";
+
+			locale = locale.replace("_", "-");
+			localeU = localeU.replace("-", "_");
+
+			var reader = new FileReader();
+			reader.onload = function () {
+				var image = new Image();
+				image.onload = function () {
+					var width = parseInt(image.width),
+						height = parseInt(image.height);
+
+					if (width < 1 || height < 1)
+						return endWithMessage("The image is too small!");
+
+					var canvas = document.createElement("canvas"),
+						context = canvas.getContext("2d", { alpha: true }),
+						sizes = [
+							16, 32, 36, 48, 72, 96, 144, 152, 192, 256, 512,
+							57, 60, 76, 114, 120, 180,
+							70, 150, 310
+						];
+
+					generateImages(image, width, height, canvas, context, sizes, function (blobs) {
+						var i, zip = new JSZip(), folder, images = [
+							{ size: 16, name: "favicon.png" },
+							{ size: 16, name: prefix + "-16x16.png" },
+							{ size: 32, name: prefix + "-32x32.png" },
+							{ size: 36, name: prefix + "-36x36.png" },
+							{ size: 48, name: prefix + "-48x48.png" },
+							{ size: 70, name: prefix + "-70x70.png" },
+							{ size: 72, name: prefix + "-72x72.png" },
+							{ size: 96, name: prefix + "-96x96.png" },
+							{ size: 144, name: prefix + "-144x144.png" },
+							{ size: 150, name: prefix + "-150x150.png" },
+							{ size: 152, name: prefix + "-152x152.png" },
+							{ size: 192, name: prefix + "-192x192.png" },
+							{ size: 256, name: prefix + "-256x256.png" },
+							{ size: 310, name: prefix + "-310x310.png" },
+							{ size: 512, name: prefix + "-512x512.png" },
+							{ size: 192, name: "apple-icon.png" },
+							{ size: 192, name: "apple-icon-precomposed.png" },
+							{ size: 57, name: "apple-icon-57x57.png" },
+							{ size: 60, name: "apple-icon-60x60.png" },
+							{ size: 72, name: "apple-icon-72x72.png" },
+							{ size: 76, name: "apple-icon-76x76.png" },
+							{ size: 114, name: "apple-icon-114x114.png" },
+							{ size: 120, name: "apple-icon-120x120.png" },
+							{ size: 144, name: "apple-icon-144x144.png" },
+							{ size: 152, name: "apple-icon-152x152.png" },
+							{ size: 180, name: "apple-icon-180x180.png" }
+						];
+
+						zip.file("head.txt",
+							'<meta property="og:locale" content="' + localeU + '" />\n' +
+							'<meta property="og:type" content="website" />\n' +
+							'<meta property="og:url" content="' + url + '" />\n' +
+							'<meta property="og:title" content="' + title + '" />\n' +
+							'<meta property="og:site_name" content="' + siteName + '" />\n' +
+							'<meta property="og:description" content="' + description + '" />\n' +
+							'<meta property="og:image" content="' + ogImage + '" />\n' +
+							'<meta property="og:image:type" content="' + ogImageType + '" />\n' +
+							'<meta property="og:image:width" content="' + ogImageWidth + '" />\n' +
+							'<meta property="og:image:height" content="' + ogImageHeight + '" />\n' +
+							'<meta name="author" content="' + author + '" />\n' +
+							'<meta name="description" content="' + description + '" />\n' +
+							'<meta name="keywords" content="' + keywords + '" />\n' +
+							'<meta name="apple-mobile-web-app-capable" content="yes" />\n' +
+							'<meta name="apple-mobile-web-app-status-bar-style" content="black" />\n' +
+							'<meta name="apple-mobile-web-app-title" content="' + title + '" />\n' +
+							'<link rel="apple-touch-icon" sizes="57x57" href="' + faviconPath + 'apple-icon-57x57.png" />\n' +
+							'<link rel="apple-touch-icon" sizes="60x60" href="' + faviconPath + 'apple-icon-60x60.png" />\n' +
+							'<link rel="apple-touch-icon" sizes="72x72" href="' + faviconPath + 'apple-icon-72x72.png" />\n' +
+							'<link rel="apple-touch-icon" sizes="76x76" href="' + faviconPath + 'apple-icon-76x76.png" />\n' +
+							'<link rel="apple-touch-icon" sizes="114x114" href="' + faviconPath + 'apple-icon-114x114.png" />\n' +
+							'<link rel="apple-touch-icon" sizes="120x120" href="' + faviconPath + 'apple-icon-120x120.png" />\n' +
+							'<link rel="apple-touch-icon" sizes="144x144" href="' + faviconPath + 'apple-icon-144x144.png" />\n' +
+							'<link rel="apple-touch-icon" sizes="152x152" href="' + faviconPath + 'apple-icon-152x152.png" />\n' +
+							'<link rel="apple-touch-icon" sizes="180x180" href="' + faviconPath + 'apple-icon-180x180.png" />\n' +
+							'<link rel="icon" type="image/png" sizes="512x512" href="' + faviconPath + prefix + '-512x512.png" />\n' +
+							'<link rel="icon" type="image/png" sizes="192x192" href="' + faviconPath + prefix + '-192x192.png" />\n' +
+							'<link rel="icon" type="image/png" sizes="96x96" href="' + faviconPath + prefix + '-96x96.png" />\n' +
+							'<link rel="icon" type="image/png" sizes="48x48" href="' + faviconPath + prefix + '-48x48.png" />\n' +
+							'<link rel="icon" type="image/png" sizes="32x32" href="' + faviconPath + prefix + '-32x32.png" />\n' +
+							'<link rel="icon" type="image/png" sizes="16x16" href="' + faviconPath + prefix + '-16x16.png" />\n' +
+							'<link rel="Shortcut Icon" href="' + faviconPath + 'favicon.png" />\n' +
+							'<link rel="manifest" href="' + manifestPath + manifest + '" />\n' +
+							'<meta name="msapplication-config" content="' + manifestPath + browserConfig + '" />\n' +
+							'<meta name="theme-color" content="' + themeColor + '" />\n' +
+							'\n' +
+							'<title>' + title + '</title>\n', { binary: false });
+
+						zip.file(browserConfig,
+							'<?xml version="1.0" encoding="utf-8"?>\n' +
+							'<browserconfig><msapplication><tile><square70x70logo src="' + faviconManifestPath + prefix + '-70x70.png" /><square150x150logo src="' + faviconManifestPath + prefix + '-150x150.png" /><square310x310logo src="' + faviconManifestPath + prefix + '-310x310.png" /><TileColor>' + themeColor + '</TileColor></tile></msapplication></browserconfig>', { binary: false });
+
+						zip.file(manifest,
+							'{\n' +
+							'	"name": "' + siteName + '",\n' +
+							'	"short_name": "' + siteNameShort + '",\n' +
+							'	"start_url": "' + startURL + '",\n' +
+							'	"dir": "' + direction + '",\n' +
+							'	"lang": "' + locale + '",\n' +
+							'	"orientation": "' + orientation + '",\n' +
+							'	"display": "' + display + '",\n' +
+							'	"background_color": "' + backgroundColor + '",\n' +
+							'	"theme_color": "' + themeColor + '",\n' +
+							'	"description": "' + description + '",\n' +
+							'	"icons": [\n' +
+							'		{\n' +
+							'			"src": "' + faviconManifestPath + prefix + '-36x36.png",\n' +
+							'			"sizes": "36x36",\n' +
+							'			"type": "image/png",\n' +
+							'			"density": "0.75",\n' +
+							'			"purpose": "maskable any"\n' +
+							'		},\n' +
+							'		{\n' +
+							'			"src": "' + faviconManifestPath + prefix + '-48x48.png",\n' +
+							'			"sizes": "48x48",\n' +
+							'			"type": "image/png",\n' +
+							'			"density": "1.0",\n' +
+							'			"purpose": "maskable any"\n' +
+							'		},\n' +
+							'		{\n' +
+							'			"src": "' + faviconManifestPath + prefix + '-72x72.png",\n' +
+							'			"sizes": "72x72",\n' +
+							'			"type": "image/png",\n' +
+							'			"density": "1.5",\n' +
+							'			"purpose": "maskable any"\n' +
+							'		},\n' +
+							'		{\n' +
+							'			"src": "' + faviconManifestPath + prefix + '-96x96.png",\n' +
+							'			"sizes": "96x96",\n' +
+							'			"type": "image/png",\n' +
+							'			"density": "2.0",\n' +
+							'			"purpose": "maskable any"\n' +
+							'		},\n' +
+							'		{\n' +
+							'			"src": "' + faviconManifestPath + prefix + '-144x144.png",\n' +
+							'			"sizes": "144x144",\n' +
+							'			"type": "image/png",\n' +
+							'			"density": "3.0",\n' +
+							'			"purpose": "maskable any"\n' +
+							'		},\n' +
+							'		{\n' +
+							'			"src": "' + faviconManifestPath + prefix + '-152x152.png",\n' +
+							'			"sizes": "152x152",\n' +
+							'			"type": "image/png",\n' +
+							'			"purpose": "maskable any"\n' +
+							'		},\n' +
+							'		{\n' +
+							'			"src": "' + faviconManifestPath + prefix + '-192x192.png",\n' +
+							'			"sizes": "192x192",\n' +
+							'			"type": "image/png",\n' +
+							'			"density": "4.0",\n' +
+							'			"purpose": "maskable any"\n' +
+							'		},\n' +
+							'		{\n' +
+							'			"src": "' + faviconManifestPath + prefix + '-256x256.png",\n' +
+							'			"sizes": "256x256",\n' +
+							'			"type": "image/png",\n' +
+							'			"purpose": "maskable any"\n' +
+							'		},\n' +
+							'		{\n' +
+							'			"src": "' + faviconManifestPath + prefix + '-512x512.png",\n' +
+							'			"sizes": "512x512",\n' +
+							'			"type": "image/png",\n' +
+							'			"purpose": "maskable any"\n' +
+							'		}\n' +
+							'	]\n' +
+							'}', { binary: false })
+
+						folder = zip.folder("favicons");
+						for (i = 0; i < images.length; i++)
+							folder.file(images[i].name, blobs[images[i].size], { binary: true });
+						zip.generateAsync({ type: "blob" }).then(function (content) {
+							BlobDownloader.download("favicons.zip", content);
+							endWithMessage("Favicons successfully generated \uD83D\uDE01");
+						});
+					});
+				};
+				image.onerror = function () {
+					endWithMessage("An error occurred while decoding the image!");
+				};
+				image.src = reader.result;
+			};
+			reader.onerror = function (error) {
+				endWithMessage("An error occurred while reading the file: " + error);
+			};
+			reader.readAsDataURL(txtFile.files[0]);
+		}
+
+		//]]>
+	</script>
+</body>
+</html>
