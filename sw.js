@@ -17,14 +17,10 @@ self.addEventListener("install", (event) => {
 	// as long as we perform all other operations inside
 	// event.waitUntil(). Calling event.waitUntil() forces
 	// the installation process to be marked as finished
-	// only when all promises passed to waitUntil() finish
-	// (not used here).
+	// only when all promises passed to waitUntil() finish.
 	//
 	// self.skipWaiting();
 
-	// Delete the cache in case it already exists (we could
-	// delete only a few files instead, and let addAll()
-	// add/update the missing files...).
 	event.waitUntil(caches.open(CACHE_NAME).then((cache) => {
 		return cache.addAll([
 			// According to the spec, the service worker file
@@ -58,15 +54,19 @@ self.addEventListener("activate", (event) => {
 	event.waitUntil(
 		// List all cache storages in our domain.
 		caches.keys().then(function (keyList) {
-			return Promise.all(
-				keyList.map(function (key) {
-					// Create one Promise for deleting each cache storage that is not
-					// our current cache storage, taking care not to delete other
-					// cache storages from the domain by checking the key prefix.
-					if (key.startsWith(CACHE_PREFIX) && key !== CACHE_NAME)
-						return caches.delete(key);
-				})
-			);
+			// Create one Promise for deleting each cache storage that is not
+			// our current cache storage, taking care not to delete other
+			// cache storages from the domain by checking the key prefix (we
+			// are not using map() to avoid inserting undefined into the array).
+			let oldCachesPromises = [];
+
+			for (let i = keyList.length - 1; i >= 0; i--) {
+				let key = keyList[i];
+				if (key.startsWith(CACHE_PREFIX) && key !== CACHE_NAME)
+					oldCachesPromises.push(caches.delete(key));
+			}
+
+			return Promise.all(oldCachesPromises);
 		})
 	);
 });
