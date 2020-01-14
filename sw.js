@@ -69,10 +69,10 @@ self.addEventListener("activate", (event) => {
 			// our current cache storage, taking care not to delete other
 			// cache storages from the domain by checking the key prefix (we
 			// are not using map() to avoid inserting undefined into the array).
-			let oldCachesPromises = [];
+			const oldCachesPromises = [];
 
 			for (let i = keyList.length - 1; i >= 0; i--) {
-				let key = keyList[i];
+				const key = keyList[i];
 				if (key.startsWith(CACHE_PREFIX) && key !== CACHE_NAME)
 					oldCachesPromises.push(caches.delete(key));
 			}
