@@ -119,7 +119,7 @@ self.addEventListener("fetch", (event) => {
 				// clone of the response to the cache.
 				cache.put(event.request, response.clone());
 				return response;
-			}).catch(() => {
+			}, () => {
 				// The request was neither in our cache nor was it
 				// available from the network (maybe we are offline).
 				// Therefore, try to fulfill requests for favicons with
