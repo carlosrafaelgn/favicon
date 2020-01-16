@@ -111,13 +111,14 @@ self.addEventListener("fetch", (event) => {
 			return fetch(event.request.clone()).then((response) => {
 				// If this fetch succeeds, store it in the cache for
 				// later! (This means we probably forgot to add a file
-				// in cache.addAll() during the installation phase)
+				// to the cache during the installation phase)
 
 				// Just as requests, responses are streams and we will
 				// need two usable streams: one to be used by the cache
 				// and one to be returned to the browser! So, we send a
 				// clone of the response to the cache.
-				cache.put(event.request, response.clone());
+				if (response && response.status === 200)
+					cache.put(event.request, response.clone());
 				return response;
 			}, () => {
 				// The request was neither in our cache nor was it
