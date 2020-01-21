@@ -125,7 +125,7 @@ self.addEventListener("fetch", (event) => {
 				// available from the network (maybe we are offline).
 				// Therefore, try to fulfill requests for favicons with
 				// the largest favicon we have available in our cache.
-				if (event.request.url.toString().indexOf("favicon") >= 0)
+				if (event.request.url.indexOf("favicon") >= 0)
 					return cache.match("/favicon/favicons/favicon-512x512.png");
 
 				// The resource was not in our cache, was not available
