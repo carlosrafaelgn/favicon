@@ -99,7 +99,7 @@
 			list-style: none;
 		}
 
-		input {
+		input:not([type=checkbox]), .checkbox {
 			display: block;
 			width: 100%;
 			background: #eee;
@@ -116,7 +116,7 @@
 			transition: border-color ease-in-out .2s,box-shadow ease-in-out .2s;
 		}
 
-			input:focus {
+			input:not([type=checkbox]):focus {
 				-webkit-box-shadow: 0 0 8px #f90;
 				box-shadow: 0 0 8px #f90;
 				border-color: #f90;
@@ -232,12 +232,20 @@
 			<input type="file" accept="image/*" id="txtFile" />
 		</div>
 		<div>
-			<label for="txtFileMaskable">Maskable Image File (PNG, JPEG or SVG, square) <small><a class="btn" href="https://www.w3.org/TR/appmanifest/#icon-masks" target="_blank">More information...</a></small></label>
-			<input type="file" accept="image/*" id="txtFileMaskable" />
+			<label for="chkMaskableOK" class="checkbox">
+				<input type="checkbox" id="chkMaskableOK">
+				The image already has the correct background and already fits the safe area of maskable icons (circle with a radius of 40%)
+			</label>
 		</div>
-		<div>
-			<label for="txtMaskableBackgroundColor">Maskable Background Color</label>
-			<input type="text" id="txtMaskableBackgroundColor" value="#ffffff" />
+		<div id="divMaskable">
+			<div>
+				<label for="txtFileMaskable">Maskable Image File (PNG, JPEG or SVG, square) <small><a class="btn" href="https://www.w3.org/TR/appmanifest/#icon-masks" target="_blank">More information...</a></small></label>
+				<input type="file" accept="image/*" id="txtFileMaskable" />
+			</div>
+			<div>
+				<label for="txtMaskableBackgroundColor">Maskable Background Color</label>
+				<input type="text" id="txtMaskableBackgroundColor" value="#ffffff" />
+			</div>
 		</div>
 		<div class="row text-center">
 			<div class="col">
@@ -375,11 +383,13 @@
 		//<![CDATA[
 		"use strict";
 
-		if (("serviceWorker" in navigator))
-			navigator.serviceWorker.register("sw.js");
+		//if (("serviceWorker" in navigator))
+		//	navigator.serviceWorker.register("sw.js");
 
 		var generating = false,
 			txtFile = document.getElementById("txtFile"),
+			chkMaskableOK = document.getElementById("chkMaskableOK"),
+			divMaskable = document.getElementById("divMaskable"),
 			txtFileMaskable = document.getElementById("txtFileMaskable"),
 			txtMaskableBackgroundColor = document.getElementById("txtMaskableBackgroundColor"),
 			imgPreview = document.getElementById("imgPreview"),
@@ -459,6 +469,18 @@
 			}
 		};
 
+		chkMaskableOK.onclick = function () {
+			if (chkMaskableOK.checked) {
+				divMaskable.style.display = "none";
+				imgPreviewMaskable.style.backgroundColor = "";
+				imgPreviewMaskable.style.backgroundImage = imgPreview.style.backgroundImage;
+			} else {
+				divMaskable.style.display = "";
+				imgPreviewMaskable.style.backgroundColor = trim(txtMaskableBackgroundColor.value);
+				imgPreviewMaskable.style.backgroundImage = (previewMaskableURL ? ("url(" + previewMaskableURL + ")") : imgPreview.style.backgroundImage);
+			}
+		};
+
 		txtFile.onchange = function () {
 			if (previewURL) {
 				URL.revokeObjectURL(previewURL);
@@ -467,14 +489,14 @@
 
 			if (!txtFile.files[0]) {
 				imgPreview.style.backgroundImage = "";
-				if (!previewMaskableURL)
+				if (!previewMaskableURL || chkMaskableOK.checked)
 					imgPreviewMaskable.style.backgroundImage = "";
 				return;
 			}
 
 			previewURL = URL.createObjectURL(txtFile.files[0]);
 			imgPreview.style.backgroundImage = "url(" + previewURL + ")";
-			if (!previewMaskableURL)
+			if (!previewMaskableURL || chkMaskableOK.checked)
 				imgPreviewMaskable.style.backgroundImage = imgPreview.style.backgroundImage;
 		};
 
@@ -660,7 +682,7 @@
 					if (originalWidth < 1 || originalHeight < 1)
 						return endWithMessage("The image is too small!");
 
-					if (maskableImage) {
+					if (maskableImage && !chkMaskableOK.checked) {
 						maskableWidth = parseInt(maskableImage.width);
 						maskableHeight = parseInt(maskableImage.height);
 						if (maskableWidth < 1 || maskableHeight < 1)
@@ -673,12 +695,15 @@
 					var canvas = document.createElement("canvas"),
 						context = canvas.getContext("2d", { alpha: true }),
 						sizes = [
-							16, 32, 36, 48, 72, 96, 144, 152, 192, -192, 256, 512, -512,
+							16, 32, 36, 48, 72, 96, 144, 152, 192, 256, 512,
 							57, 60, 76, 114, 120, 180,
 							70, 150, 310
 						];
 
-					generateImages(originalImage, originalWidth, originalHeight, maskableImage || originalImage, maskableWidth, maskableHeight, canvas, context, sizes, function (blobs) {
+					if (!chkMaskableOK.checked)
+						sizes.push(-192, -512);
+
+					generateImages(originalImage, originalWidth, originalHeight, (maskableImage && !chkMaskableOK.checked) ? maskableImage : originalImage, maskableWidth, maskableHeight, canvas, context, sizes, function (blobs) {
 						var i, zip = new JSZip(), folder, images = [
 							{ size: 16, name: "favicon.png" },
 							{ size: 16, name: prefix + "-16x16.png" },
@@ -692,11 +717,9 @@
 							{ size: 150, name: prefix + "-150x150.png" },
 							{ size: 152, name: prefix + "-152x152.png" },
 							{ size: 192, name: prefix + "-192x192.png" },
-							{ size: -192, name: prefix + "-maskable-192x192.png" },
 							{ size: 256, name: prefix + "-256x256.png" },
 							{ size: 310, name: prefix + "-310x310.png" },
 							{ size: 512, name: prefix + "-512x512.png" },
-							{ size: -512, name: prefix + "-maskable-512x512.png" },
 							{ size: 192, name: "apple-icon.png" },
 							{ size: 192, name: "apple-icon-precomposed.png" },
 							{ size: 57, name: "apple-icon-57x57.png" },
@@ -708,7 +731,13 @@
 							{ size: 144, name: "apple-icon-144x144.png" },
 							{ size: 152, name: "apple-icon-152x152.png" },
 							{ size: 180, name: "apple-icon-180x180.png" }
-						];
+						], purpose = (chkMaskableOK.checked ? "any maskable" : "any");
+
+						if (!chkMaskableOK.checked)
+							images.push(
+								{ size: -192, name: prefix + "-maskable-192x192.png" },
+								{ size: -512, name: prefix + "-maskable-512x512.png" }
+							);
 
 						zip.file("head.txt",
 							'<meta property="og:locale" content="' + localeU + '" />\n' +
@@ -771,74 +800,78 @@
 							'			"sizes": "36x36",\n' +
 							'			"type": "image/png",\n' +
 							'			"density": "0.75",\n' +
-							'			"purpose": "any"\n' +
+							'			"purpose": "' + purpose + '"\n' +
 							'		},\n' +
 							'		{\n' +
 							'			"src": "' + faviconManifestPath + prefix + '-48x48.png",\n' +
 							'			"sizes": "48x48",\n' +
 							'			"type": "image/png",\n' +
 							'			"density": "1.0",\n' +
-							'			"purpose": "any"\n' +
+							'			"purpose": "' + purpose + '"\n' +
 							'		},\n' +
 							'		{\n' +
 							'			"src": "' + faviconManifestPath + prefix + '-72x72.png",\n' +
 							'			"sizes": "72x72",\n' +
 							'			"type": "image/png",\n' +
 							'			"density": "1.5",\n' +
-							'			"purpose": "any"\n' +
+							'			"purpose": "' + purpose + '"\n' +
 							'		},\n' +
 							'		{\n' +
 							'			"src": "' + faviconManifestPath + prefix + '-96x96.png",\n' +
 							'			"sizes": "96x96",\n' +
 							'			"type": "image/png",\n' +
 							'			"density": "2.0",\n' +
-							'			"purpose": "any"\n' +
+							'			"purpose": "' + purpose + '"\n' +
 							'		},\n' +
 							'		{\n' +
 							'			"src": "' + faviconManifestPath + prefix + '-144x144.png",\n' +
 							'			"sizes": "144x144",\n' +
 							'			"type": "image/png",\n' +
 							'			"density": "3.0",\n' +
-							'			"purpose": "any"\n' +
+							'			"purpose": "' + purpose + '"\n' +
 							'		},\n' +
 							'		{\n' +
 							'			"src": "' + faviconManifestPath + prefix + '-152x152.png",\n' +
 							'			"sizes": "152x152",\n' +
 							'			"type": "image/png",\n' +
-							'			"purpose": "any"\n' +
+							'			"purpose": "' + purpose + '"\n' +
 							'		},\n' +
 							'		{\n' +
 							'			"src": "' + faviconManifestPath + prefix + '-192x192.png",\n' +
 							'			"sizes": "192x192",\n' +
 							'			"type": "image/png",\n' +
 							'			"density": "4.0",\n' +
-							'			"purpose": "any"\n' +
+							'			"purpose": "' + purpose + '"\n' +
 							'		},\n' +
+							(chkMaskableOK.checked ? '' : (
 							'		{\n' +
 							'			"src": "' + faviconManifestPath + prefix + '-maskable-192x192.png",\n' +
 							'			"sizes": "192x192",\n' +
 							'			"type": "image/png",\n' +
 							'			"density": "4.0",\n' +
 							'			"purpose": "maskable"\n' +
-							'		},\n' +
+							'		},\n'
+							)) +
 							'		{\n' +
 							'			"src": "' + faviconManifestPath + prefix + '-256x256.png",\n' +
 							'			"sizes": "256x256",\n' +
 							'			"type": "image/png",\n' +
-							'			"purpose": "any"\n' +
+							'			"purpose": "' + purpose + '"\n' +
 							'		},\n' +
 							'		{\n' +
 							'			"src": "' + faviconManifestPath + prefix + '-512x512.png",\n' +
 							'			"sizes": "512x512",\n' +
 							'			"type": "image/png",\n' +
-							'			"purpose": "any"\n' +
+							'			"purpose": "' + purpose + '"\n' +
+							(chkMaskableOK.checked ? '		}\n' : (
 							'		},\n' +
 							'		{\n' +
 							'			"src": "' + faviconManifestPath + prefix + '-maskable-512x512.png",\n' +
 							'			"sizes": "512x512",\n' +
 							'			"type": "image/png",\n' +
 							'			"purpose": "maskable"\n' +
-							'		}\n' +
+							'		}\n'
+							)) +
 							'	]\n' +
 							'}\n', { binary: false })
 
