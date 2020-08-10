@@ -60,7 +60,16 @@
 
 		body, button, input, select {
 			margin: 0;
-			font: 400 14px 'Open Sans', 'Segoe UI', Helvetica, Arial, sans-serif;
+			font-weight: 400;
+			font-family: 'Open Sans', 'Segoe UI', Helvetica, Arial, sans-serif;
+		}
+
+		body, input, select {
+			font-size: 14px;
+		}
+
+		button {
+			font-size: 30px;
 		}
 
 		main {
@@ -123,7 +132,7 @@
 		}
 
 		.btn {
-			display: block;
+			display: inline-block;
 			background: #eee;
 			color: #000;
 			font-weight: 600;
@@ -132,7 +141,7 @@
 			border: 0;
 			line-height: 1.5;
 			padding: 6px 12px;
-			margin: 1em auto;
+			margin: 0;
 			cursor: pointer;
 			-webkit-box-shadow: 0 0 5px #fff;
 			box-shadow: 0 0 5px #fff;
@@ -152,6 +161,16 @@
 				box-shadow: 0 0 8px #f90, inset 0 3px 5px rgba(0,0,0,0.25);
 			}
 
+		.btn-block {
+			display: block;
+			width: 100%;
+			margin: 1em auto;
+		}
+
+		.text-center {
+			text-align: center;
+		}
+
 		.message {
 			text-align: center;
 			background: #eee;
@@ -165,17 +184,76 @@
 			-webkit-box-shadow: 0 0 5px #fff;
 			box-shadow: 0 0 5px #fff;
 		}
+
+		.row {
+			overflow: hidden;
+			white-space: nowrap;
+		}
+
+		.col {
+			display: inline-block;
+			vertical-align: top;
+			width: 50%;
+			white-space: normal;
+		}
+
+		.preview {
+			display: inline-block;
+			width: 102px;
+			height: 102px;
+			margin: 10px 0;
+			padding: 10px;
+			vertical-align: top;
+			border: 1px solid #000;
+			box-shadow: 0px 0px 5px #fff;
+			background-repeat: no-repeat;
+			background-position: center;
+			background-size: contain;
+		}
+
+		.safe-area {
+			display: inline-block;
+			vertical-align: top;
+			margin: 0;
+			border-radius: 80px;
+			width: 80px;
+			height: 80px;
+			background-color: rgba(0,0,0,0.5);
+		}
 	</style>
 </head>
 <body>
 	<main>
 		<h1>
-			Favicon Helper
+			Image and Background
 		</h1>
 		<div>
-			<label for="txtFile">Image File (PNG, JPEG or SVG, preferably square)</label>
+			<label for="txtFile">Image File (PNG, JPEG or SVG, square)</label>
 			<input type="file" accept="image/*" id="txtFile" />
 		</div>
+		<div>
+			<label for="txtFileMaskable">Maskable Image File (PNG, JPEG or SVG, square) <small><a class="btn" href="https://www.w3.org/TR/appmanifest/#icon-masks" target="_blank">More information...</a></small></label>
+			<input type="file" accept="image/*" id="txtFileMaskable" />
+		</div>
+		<div>
+			<label for="txtMaskableBackgroundColor">Maskable Background Color</label>
+			<input type="text" id="txtMaskableBackgroundColor" value="#ffffff" />
+		</div>
+		<div class="row text-center">
+			<div class="col">
+				<label for="imgPreview">Preview</label>
+				<br />
+				<span class="preview" id="imgPreview"></span>
+			</div>
+			<div class="col">
+				<label for="imgPreviewMaskable">Preview (Maskable Safe Zone)</label>
+				<br />
+				<span class="preview" id="imgPreviewMaskable" style="background-color: #fff;"><span class="safe-area"></span></span>
+			</div>
+		</div>
+		<h1>
+			Additional Information
+		</h1>
 		<div>
 			<label for="txtURL">Page URL</label>
 			<input type="url" id="txtURL" spellcheck="false" value="https://carlosrafaelgn.github.io/" />
@@ -225,11 +303,11 @@
 			<input type="text" id="txtBackgroundColor" spellcheck="false" value="#222222" />
 		</div>
 		<div>
-			<label for="txtOrientation">Orientation</label>
+			<label for="txtOrientation">Orientation <small><a class="btn" href="https://www.w3.org/TR/screen-orientation/#screenorientation-interface" target="_blank">More information...</a></small></label>
 			<input type="text" id="txtOrientation" spellcheck="false" value="portrait-primary" />
 		</div>
 		<div>
-			<label for="txtDisplay">Display</label>
+			<label for="txtDisplay">Display <small><a class="btn" href="https://www.w3.org/TR/appmanifest/#display-modes" target="_blank">More information...</a></small></label>
 			<input type="text" id="txtDisplay" spellcheck="false" value="standalone" />
 		</div>
 		<div>
@@ -273,20 +351,22 @@
 			<input type="text" id="txtFaviconManifestPath" spellcheck="false" value="favicons" />
 		</div>
 		<div class="message" id="divMessage" style="display: none;"></div>
-		<button class="btn" type="button" onclick="generate()">Generate!</button>
+		<div class="text-center">
+			<button class="btn" type="button" onclick="generate()">Generate!</button>
+		</div>
 		<h1>Useful Links</h1>
 		<ul>
 			<li>
-				<a class="btn" href="https://carlosrafaelgn.github.io/favicon/" target="_blank">This app!</a>
+				<a class="btn btn-block" href="https://carlosrafaelgn.github.io/favicon/" target="_blank">This app!</a>
 			</li>
 			<li>
-				<a class="btn" href="https://github.com/carlosrafaelgn/favicon" target="_blank">GitHub - This app's source code</a>
+				<a class="btn btn-block" href="https://github.com/carlosrafaelgn/favicon" target="_blank">GitHub - This app's source code</a>
 			</li>
 			<li>
-				<a class="btn" href="https://developer.mozilla.org/en-US/docs/Web/Manifest" target="_blank">MDN - Web App Manifest</a>
+				<a class="btn btn-block" href="https://developer.mozilla.org/en-US/docs/Web/Manifest" target="_blank">MDN - Web App Manifest</a>
 			</li>
 			<li>
-				<a class="btn" href="https://github.com/Stuk/jszip" target="_blank">JSZip - Library used to create ZIP files using JavaScript</a>
+				<a class="btn btn-block" href="https://github.com/Stuk/jszip" target="_blank">JSZip - Library used to create ZIP files using JavaScript</a>
 			</li>
 		</ul>
 	</main>
@@ -298,7 +378,17 @@
 		if (("serviceWorker" in navigator))
 			navigator.serviceWorker.register("sw.js");
 
-		var generating = false;
+		var generating = false,
+			txtFile = document.getElementById("txtFile"),
+			txtFileMaskable = document.getElementById("txtFileMaskable"),
+			txtMaskableBackgroundColor = document.getElementById("txtMaskableBackgroundColor"),
+			imgPreview = document.getElementById("imgPreview"),
+			imgPreviewMaskable = document.getElementById("imgPreviewMaskable"),
+			previewURL = null,
+			previewMaskableURL = null;
+
+		if (!window.URL)
+			window.URL = window.webkitURL;
 
 		window.trim = (function () {
 			if (window.String && window.String.prototype && window.String.prototype.trim)
@@ -369,8 +459,50 @@
 			}
 		};
 
-		function generateImage(srcImage, srcWidth, srcHeight, canvas, context, dstSize, callback) {
-			var dstWidth, dstHeight;
+		txtFile.onchange = function () {
+			if (previewURL) {
+				URL.revokeObjectURL(previewURL);
+				previewURL = null;
+			}
+
+			if (!txtFile.files[0]) {
+				imgPreview.style.backgroundImage = "";
+				if (!previewMaskableURL)
+					imgPreviewMaskable.style.backgroundImage = "";
+				return;
+			}
+
+			previewURL = URL.createObjectURL(txtFile.files[0]);
+			imgPreview.style.backgroundImage = "url(" + previewURL + ")";
+			if (!previewMaskableURL)
+				imgPreviewMaskable.style.backgroundImage = imgPreview.style.backgroundImage;
+		};
+
+		txtFileMaskable.onchange = function () {
+			if (previewMaskableURL) {
+				URL.revokeObjectURL(previewMaskableURL);
+				previewMaskableURL = null;
+			}
+
+			if (!txtFileMaskable.files[0]) {
+				imgPreviewMaskable.style.backgroundImage = imgPreview.style.backgroundImage;
+				return;
+			}
+
+			previewMaskableURL = URL.createObjectURL(txtFileMaskable.files[0]);
+			imgPreviewMaskable.style.backgroundImage = "url(" + previewMaskableURL + ")";
+		};
+
+		function updateImgPreviewMaskableBackgroundColor() {
+			imgPreviewMaskable.style.backgroundColor = trim(txtMaskableBackgroundColor.value);
+		}
+
+		txtMaskableBackgroundColor.onkeydown = updateImgPreviewMaskableBackgroundColor;
+		txtMaskableBackgroundColor.onkeyup = updateImgPreviewMaskableBackgroundColor;
+		txtMaskableBackgroundColor.onchange = updateImgPreviewMaskableBackgroundColor;
+
+		function generateImage(srcImage, srcWidth, srcHeight, canvas, context, size, callback) {
+			var dstSize = Math.abs(size), dstWidth, dstHeight;
 
 			if (srcWidth >= srcHeight) {
 				dstWidth = dstSize;
@@ -391,6 +523,10 @@
 				// Just ignore...
 			}
 			context.clearRect(0, 0, dstSize, dstSize);
+			if (size < 0) {
+				context.fillStyle = trim(txtMaskableBackgroundColor.value);
+				context.fillRect(0, 0, dstSize, dstSize);
+			}
 			context.drawImage(srcImage, (dstSize - dstWidth) >> 1, (dstSize - dstHeight) >> 1, dstWidth, dstHeight);
 
 			if (!HTMLCanvasElement.prototype.toBlob) {
@@ -407,28 +543,62 @@
 			}
 		}
 
-		function generateImages(srcImage, srcWidth, srcHeight, canvas, context, dstSizes, callback) {
+		function generateImages(srcImage, srcWidth, srcHeight, maskableImage, maskableWidth, maskableHeight, canvas, context, dstSizes, callback) {
 			var blobs = {};
 
 			function next(i) {
-				if (i >= dstSizes.length)
+				if (i >= dstSizes.length) {
 					callback(blobs);
-				else
-					generateImage(srcImage, srcWidth, srcHeight, canvas, context, dstSizes[i], function (blob) {
+				} else {
+					var size = dstSizes[i];
+
+					generateImage(size > 0 ? srcImage : maskableImage, size > 0 ? srcWidth : maskableWidth, size > 0 ? srcHeight : maskableHeight, canvas, context, size, function (blob) {
 						blobs[dstSizes[i]] = blob;
 						next(i + 1);
 					});
+				}
 			}
 
 			next(0);
+		}
+
+		function loadImage(url, callback) {
+			if (!url) {
+				callback(null);
+				return;
+			}
+
+			var image = new Image();
+			image.onload = function () {
+				callback(image);
+			};
+			image.onerror = function () {
+				endWithMessage("An error occurred while decoding the image!");
+			};
+			image.src = url;
+
+			//var reader = new FileReader();
+			//reader.onload = function () {
+			//	var image = new Image();
+			//	image.onload = function () {
+			//		callback(image);
+			//	};
+			//	image.onerror = function () {
+			//		endWithMessage("An error occurred while decoding the image!");
+			//	};
+			//	image.src = reader.result;
+			//};
+			//reader.onerror = function (error) {
+			//	endWithMessage("An error occurred while reading the file: " + error);
+			//};
+			//reader.readAsDataURL(file);
 		}
 
 		function generate() {
 			if (generating)
 				return;
 
-			var txtFile = document.getElementById("txtFile"),
-				url = trimValue("txtURL"),
+			var url = trimValue("txtURL"),
 				locale = trimValue("txtLocale"),
 				localeU = locale,
 				author = trimValue("txtAuthor"),
@@ -479,25 +649,36 @@
 			locale = locale.replace("_", "-");
 			localeU = localeU.replace("-", "_");
 
-			var reader = new FileReader();
-			reader.onload = function () {
-				var image = new Image();
-				image.onload = function () {
-					var width = parseInt(image.width),
-						height = parseInt(image.height);
+			loadImage(previewURL, function (originalImage) {
+				loadImage(previewMaskableURL, function (maskableImage) {
 
-					if (width < 1 || height < 1)
+					var originalWidth = parseInt(originalImage.width),
+						originalHeight = parseInt(originalImage.height),
+						maskableWidth = 0,
+						maskableHeight = 0;
+
+					if (originalWidth < 1 || originalHeight < 1)
 						return endWithMessage("The image is too small!");
+
+					if (maskableImage) {
+						maskableWidth = parseInt(maskableImage.width);
+						maskableHeight = parseInt(maskableImage.height);
+						if (maskableWidth < 1 || maskableHeight < 1)
+							return endWithMessage("The maskable image is too small!");
+					} else {
+						maskableWidth = originalWidth;
+						maskableHeight = originalHeight;
+					}
 
 					var canvas = document.createElement("canvas"),
 						context = canvas.getContext("2d", { alpha: true }),
 						sizes = [
-							16, 32, 36, 48, 72, 96, 144, 152, 192, 256, 512,
+							16, 32, 36, 48, 72, 96, 144, 152, 192, -192, 256, 512, -512,
 							57, 60, 76, 114, 120, 180,
 							70, 150, 310
 						];
 
-					generateImages(image, width, height, canvas, context, sizes, function (blobs) {
+					generateImages(originalImage, originalWidth, originalHeight, maskableImage || originalImage, maskableWidth, maskableHeight, canvas, context, sizes, function (blobs) {
 						var i, zip = new JSZip(), folder, images = [
 							{ size: 16, name: "favicon.png" },
 							{ size: 16, name: prefix + "-16x16.png" },
@@ -511,9 +692,11 @@
 							{ size: 150, name: prefix + "-150x150.png" },
 							{ size: 152, name: prefix + "-152x152.png" },
 							{ size: 192, name: prefix + "-192x192.png" },
+							{ size: -192, name: prefix + "-maskable-192x192.png" },
 							{ size: 256, name: prefix + "-256x256.png" },
 							{ size: 310, name: prefix + "-310x310.png" },
 							{ size: 512, name: prefix + "-512x512.png" },
+							{ size: -512, name: prefix + "-maskable-512x512.png" },
 							{ size: 192, name: "apple-icon.png" },
 							{ size: 192, name: "apple-icon-precomposed.png" },
 							{ size: 57, name: "apple-icon-57x57.png" },
@@ -588,63 +771,76 @@
 							'			"sizes": "36x36",\n' +
 							'			"type": "image/png",\n' +
 							'			"density": "0.75",\n' +
-							'			"purpose": "maskable any"\n' +
+							'			"purpose": "any"\n' +
 							'		},\n' +
 							'		{\n' +
 							'			"src": "' + faviconManifestPath + prefix + '-48x48.png",\n' +
 							'			"sizes": "48x48",\n' +
 							'			"type": "image/png",\n' +
 							'			"density": "1.0",\n' +
-							'			"purpose": "maskable any"\n' +
+							'			"purpose": "any"\n' +
 							'		},\n' +
 							'		{\n' +
 							'			"src": "' + faviconManifestPath + prefix + '-72x72.png",\n' +
 							'			"sizes": "72x72",\n' +
 							'			"type": "image/png",\n' +
 							'			"density": "1.5",\n' +
-							'			"purpose": "maskable any"\n' +
+							'			"purpose": "any"\n' +
 							'		},\n' +
 							'		{\n' +
 							'			"src": "' + faviconManifestPath + prefix + '-96x96.png",\n' +
 							'			"sizes": "96x96",\n' +
 							'			"type": "image/png",\n' +
 							'			"density": "2.0",\n' +
-							'			"purpose": "maskable any"\n' +
+							'			"purpose": "any"\n' +
 							'		},\n' +
 							'		{\n' +
 							'			"src": "' + faviconManifestPath + prefix + '-144x144.png",\n' +
 							'			"sizes": "144x144",\n' +
 							'			"type": "image/png",\n' +
 							'			"density": "3.0",\n' +
-							'			"purpose": "maskable any"\n' +
+							'			"purpose": "any"\n' +
 							'		},\n' +
 							'		{\n' +
 							'			"src": "' + faviconManifestPath + prefix + '-152x152.png",\n' +
 							'			"sizes": "152x152",\n' +
 							'			"type": "image/png",\n' +
-							'			"purpose": "maskable any"\n' +
+							'			"purpose": "any"\n' +
 							'		},\n' +
 							'		{\n' +
 							'			"src": "' + faviconManifestPath + prefix + '-192x192.png",\n' +
 							'			"sizes": "192x192",\n' +
 							'			"type": "image/png",\n' +
 							'			"density": "4.0",\n' +
-							'			"purpose": "maskable any"\n' +
+							'			"purpose": "any"\n' +
+							'		},\n' +
+							'		{\n' +
+							'			"src": "' + faviconManifestPath + prefix + '-maskable-192x192.png",\n' +
+							'			"sizes": "192x192",\n' +
+							'			"type": "image/png",\n' +
+							'			"density": "4.0",\n' +
+							'			"purpose": "maskable"\n' +
 							'		},\n' +
 							'		{\n' +
 							'			"src": "' + faviconManifestPath + prefix + '-256x256.png",\n' +
 							'			"sizes": "256x256",\n' +
 							'			"type": "image/png",\n' +
-							'			"purpose": "maskable any"\n' +
+							'			"purpose": "any"\n' +
 							'		},\n' +
 							'		{\n' +
 							'			"src": "' + faviconManifestPath + prefix + '-512x512.png",\n' +
 							'			"sizes": "512x512",\n' +
 							'			"type": "image/png",\n' +
-							'			"purpose": "maskable any"\n' +
+							'			"purpose": "any"\n' +
+							'		},\n' +
+							'		{\n' +
+							'			"src": "' + faviconManifestPath + prefix + '-maskable-512x512.png",\n' +
+							'			"sizes": "512x512",\n' +
+							'			"type": "image/png",\n' +
+							'			"purpose": "maskable"\n' +
 							'		}\n' +
 							'	]\n' +
-							'}', { binary: false })
+							'}\n', { binary: false })
 
 						folder = zip.folder("favicons");
 						for (i = 0; i < images.length; i++)
@@ -654,16 +850,8 @@
 							endWithMessage("Favicons successfully generated \uD83D\uDE01");
 						});
 					});
-				};
-				image.onerror = function () {
-					endWithMessage("An error occurred while decoding the image!");
-				};
-				image.src = reader.result;
-			};
-			reader.onerror = function (error) {
-				endWithMessage("An error occurred while reading the file: " + error);
-			};
-			reader.readAsDataURL(txtFile.files[0]);
+				});	
+			});
 		}
 
 		//]]>

@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="256"
+   height="256"
+   viewBox="0 0 255.99974 256.00001"
+   version="1.1"
+   id="svg8"
+   inkscape:version="0.92.3 (2405546, 2018-03-11)"
+   sodipodi:docname="favicon-maskable.svg"
+   inkscape:export-filename="D:\Carlos Rafael\Faculdade\ESPM\Apps\Editor\favicons\favicon-512x512.png"
+   inkscape:export-xdpi="192.00002"
+   inkscape:export-ydpi="192.00002">
+  <defs
+     id="defs2" />
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="0.49497475"
+     inkscape:cx="18.568442"
+     inkscape:cy="324.13084"
+     inkscape:document-units="px"
+     inkscape:current-layer="layer1"
+     showgrid="false"
+     units="px"
+     inkscape:window-width="1366"
+     inkscape:window-height="705"
+     inkscape:window-x="-8"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1" />
+  <metadata
+     id="metadata5">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(0,-866.51969)">
+    <path
+       inkscape:connector-curvature="0"
+       id="path4526"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:medium;line-height:1.25;font-family:FontAwesome;-inkscape-font-specification:FontAwesome;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:4.89670229"
+       d="m 90.503284,1042.4951 c 1.421155,-1.4207 1.421155,-3.6064 0,-5.0271 L 47.540726,994.5197 90.503284,951.57136 c 1.421155,-1.42069 1.421155,-3.60635 0,-5.02704 l -5.465972,-5.46416 c -1.421156,-1.42068 -3.607548,-1.42068 -5.028699,0 L 29.065728,992.0062 c -1.421151,1.4207 -1.421151,3.6063 0,5.027 l 50.942885,50.926 c 1.421151,1.4207 3.607543,1.4207 5.028699,0 z M 155.1111,925.88978 c 0.5466,-1.85782 -0.54659,-3.82492 -2.40503,-4.37133 l -6.77781,-1.85781 c -1.74911,-0.54642 -3.71685,0.54641 -4.26345,2.40422 l -40.77617,141.08474 c -0.5466,1.8579 0.54659,3.8249 2.40502,4.3714 l 6.77781,1.8578 c 1.74912,0.5463 3.71686,-0.5464 4.26346,-2.4043 z m 71.82291,71.14342 c 1.42115,-1.4207 1.42115,-3.6063 0,-5.027 l -50.94289,-50.92604 c -1.42115,-1.42068 -3.60754,-1.42068 -5.0287,0 l -5.46596,5.46416 c -1.42116,1.42069 -1.42116,3.60635 0,5.02704 l 42.96256,42.94834 -42.96256,42.9483 c -1.42116,1.4207 -1.42116,3.6064 0,5.0271 l 5.46596,5.4641 c 1.42116,1.4207 3.60755,1.4207 5.0287,0 z" />
+  </g>
+</svg>
