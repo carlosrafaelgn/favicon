@@ -1,4 +1,30 @@
-﻿"use strict";
+﻿//
+// MIT License
+//
+// Copyright (c) 2019 Carlos Rafael Gimenes das Neves
+//
+// Permission is hereby granted, free of charge, to any person obtaining a copy
+// of this software and associated documentation files (the "Software"), to deal
+// in the Software without restriction, including without limitation the rights
+// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+// copies of the Software, and to permit persons to whom the Software is
+// furnished to do so, subject to the following conditions:
+//
+// The above copyright notice and this permission notice shall be included in all
+// copies or substantial portions of the Software.
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+// AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+// SOFTWARE.
+//
+// https://github.com/carlosrafaelgn/favicon
+//
+
+"use strict";
 
 // Change this value to force the browser to install the
 // service worker again, and recreate the cache (this technique
@@ -6,7 +32,7 @@
 // whenever it detects a change in the source code of the
 // service worker).
 const CACHE_PREFIX = "favicon-helper-static-cache";
-const CACHE_VERSION = "-v3";
+const CACHE_VERSION = "-v4";
 const CACHE_NAME = CACHE_PREFIX + CACHE_VERSION;
 
 self.addEventListener("install", (event) => {
@@ -85,7 +111,7 @@ self.addEventListener("activate", (event) => {
 
 self.addEventListener("fetch", (event) => {
 	// https://developer.mozilla.org/en-US/docs/Web/API/Request
-	// mode is navigate only for the document itself (/neon/ or
+	// mode is navigate only for the document itself (/favicon/ or
 	// index.html), whereas for all other requests, mode is cors,
 	// no-cors and so on. So, in order to make the entire game
 	// work offline we must handle all kinds of requests!
@@ -119,7 +145,14 @@ self.addEventListener("fetch", (event) => {
 				// and one to be returned to the browser! So, we send a
 				// clone of the response to the cache.
 				if (response && response.status === 200)
-					cache.put(event.request, response.clone());
+					return cache.put(event.request, response.clone()).then(() => {
+						return response;
+					}, () => {
+						// If anything goes wrong, just ignore and try
+						// to add the response to the cache later.
+						return response;
+					});
+
 				return response;
 			}, () => {
 				// The request was neither in our cache nor was it
