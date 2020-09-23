@@ -85,9 +85,9 @@ self.addEventListener("activate", (event) => {
 	// claim() is used to ask the browser to use this instance
 	// of the service worker with all possible clients, including
 	// any pages that might have been opened before this service
-	// worker was downloaded/activated (not used here).
-	//
-	//self.clients.claim();
+	// worker was downloaded/activated.
+
+	self.clients.claim();
 
 	event.waitUntil(
 		// List all cache storages in our domain.
