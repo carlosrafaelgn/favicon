@@ -44,8 +44,8 @@ self.addEventListener("install", (event) => {
 	// event.waitUntil(). Calling event.waitUntil() forces
 	// the installation process to be marked as finished
 	// only when all promises passed to waitUntil() finish.
-	//
-	// self.skipWaiting();
+
+	self.skipWaiting();
 
 	event.waitUntil(caches.open(CACHE_NAME).then((cache) => {
 		// According to the spec, the service worker file
@@ -76,7 +76,7 @@ self.addEventListener("install", (event) => {
 		];
 		const promises = new Array(files.length);
 		for (let i = files.length - 1; i >= 0; i--)
-			promises.push(cache.add(new Request(files[i], { cache: "no-store" })));
+			promises[i] = cache.add(new Request(files[i], { cache: "no-store" }));
 		return Promise.all(promises);
 	}));
 });
