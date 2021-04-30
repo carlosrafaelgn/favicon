@@ -1,7 +1,7 @@
 {
 	"name": "Favicon Helper",
 	"short_name": "Favicon Helper",
-	"start_url": "/favicon/?pwa",
+	"start_url": "/favicon/",
 	"dir": "ltr",
 	"lang": "en-US",
 	"orientation": "landscape-primary",
