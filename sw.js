@@ -32,7 +32,7 @@
 // whenever it detects a change in the source code of the
 // service worker).
 const CACHE_PREFIX = "favicon-helper-static-cache";
-const CACHE_VERSION = "-20210502";
+const CACHE_VERSION = "-20210514";
 const CACHE_NAME = CACHE_PREFIX + CACHE_VERSION;
 
 self.addEventListener("install", (event) => {
@@ -71,7 +71,7 @@ self.addEventListener("install", (event) => {
 			"/favicon/favicon.png",
 			"/favicon/favicons/favicon-512x512.png",
 			"/favicon/jszip.min.js",
-			"/favicon/manifest.json"
+			"/favicon/manifest.webmanifest"
 		];
 		const promises = new Array(files.length);
 		for (let i = files.length - 1; i >= 0; i--)

@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en-us" dir="ltr">
 <head>
 	<meta charset="utf-8" />
-	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+	<meta http-equiv="X-UA-Compatible" content="ie=edge" />
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
 	<meta name="color-scheme" content="dark" />
 
@@ -42,7 +42,7 @@
 	<link rel="icon" type="image/png" sizes="16x16" href="favicons/favicon-16x16.png" />
 	<link rel="Shortcut Icon" href="favicon.ico" />
 	<link rel="Shortcut Icon" href="favicon.png" />
-	<link rel="manifest" href="manifest.json" />
+	<link rel="manifest" href="manifest.webmanifest" />
 	<meta name="msapplication-config" content="browserconfig.xml" />
 	<meta name="theme-color" content="#222222" />
 
@@ -347,7 +347,7 @@
 		</div>
 		<div>
 			<label for="txtManifest">Manifest File</label>
-			<input type="text" id="txtManifest" spellcheck="false" value="manifest.json" />
+			<input type="text" id="txtManifest" spellcheck="false" value="manifest.webmanifest" />
 		</div>
 		<div>
 			<label for="txtBrowserConfig">Browser Config File</label>
@@ -813,35 +813,30 @@
 							'			"src": "' + faviconManifestPath + prefix + '-36x36.png",\n' +
 							'			"sizes": "36x36",\n' +
 							'			"type": "image/png",\n' +
-							'			"density": "0.75",\n' +
 							'			"purpose": "' + purpose + '"\n' +
 							'		},\n' +
 							'		{\n' +
 							'			"src": "' + faviconManifestPath + prefix + '-48x48.png",\n' +
 							'			"sizes": "48x48",\n' +
 							'			"type": "image/png",\n' +
-							'			"density": "1.0",\n' +
 							'			"purpose": "' + purpose + '"\n' +
 							'		},\n' +
 							'		{\n' +
 							'			"src": "' + faviconManifestPath + prefix + '-72x72.png",\n' +
 							'			"sizes": "72x72",\n' +
 							'			"type": "image/png",\n' +
-							'			"density": "1.5",\n' +
 							'			"purpose": "' + purpose + '"\n' +
 							'		},\n' +
 							'		{\n' +
 							'			"src": "' + faviconManifestPath + prefix + '-96x96.png",\n' +
 							'			"sizes": "96x96",\n' +
 							'			"type": "image/png",\n' +
-							'			"density": "2.0",\n' +
 							'			"purpose": "' + purpose + '"\n' +
 							'		},\n' +
 							'		{\n' +
 							'			"src": "' + faviconManifestPath + prefix + '-144x144.png",\n' +
 							'			"sizes": "144x144",\n' +
 							'			"type": "image/png",\n' +
-							'			"density": "3.0",\n' +
 							'			"purpose": "' + purpose + '"\n' +
 							'		},\n' +
 							'		{\n' +
@@ -854,7 +849,6 @@
 							'			"src": "' + faviconManifestPath + prefix + '-192x192.png",\n' +
 							'			"sizes": "192x192",\n' +
 							'			"type": "image/png",\n' +
-							'			"density": "4.0",\n' +
 							'			"purpose": "' + purpose + '"\n' +
 							'		},\n' +
 							(chkMaskableOK.checked ? '' : (
@@ -862,7 +856,6 @@
 							'			"src": "' + faviconManifestPath + prefix + '-maskable-192x192.png",\n' +
 							'			"sizes": "192x192",\n' +
 							'			"type": "image/png",\n' +
-							'			"density": "4.0",\n' +
 							'			"purpose": "maskable"\n' +
 							'		},\n'
 							)) +
