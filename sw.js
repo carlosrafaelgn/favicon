@@ -32,7 +32,7 @@
 // whenever it detects a change in the source code of the
 // service worker).
 const CACHE_PREFIX = "favicon-helper-static-cache";
-const CACHE_VERSION = "-20210514";
+const CACHE_VERSION = "-20220624";
 const CACHE_NAME = CACHE_PREFIX + CACHE_VERSION;
 
 self.addEventListener("install", (event) => {

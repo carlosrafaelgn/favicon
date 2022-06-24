@@ -2,6 +2,7 @@
 	"name": "Favicon Helper",
 	"short_name": "Favicon",
 	"start_url": "/favicon/",
+	"id": "/favicon/",
 	"dir": "ltr",
 	"lang": "en-US",
 	"orientation": "landscape-primary",
